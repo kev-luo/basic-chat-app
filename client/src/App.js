@@ -1,8 +1,18 @@
+import React from "react";
 import Chat from "./components/Chat";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  createHttpLink,
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
+
+const httpLink = createHttpLink({
+  uri: "http://localhost:4000/",
+});
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/",
+  link: httpLink,
   cache: new InMemoryCache(),
 });
 
@@ -11,7 +21,7 @@ function App() {
     <ApolloProvider client={client}>
       <Chat />
     </ApolloProvider>
-  )
+  );
 }
 
 export default App;
