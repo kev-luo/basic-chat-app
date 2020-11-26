@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { useQuery } from "@apollo/client";
 import { GET_MESSAGES_QUERY, MSG_SUBSCRIPTION } from "../utils/graphql";
@@ -6,7 +6,6 @@ import { GET_MESSAGES_QUERY, MSG_SUBSCRIPTION } from "../utils/graphql";
 import MsgInputSub from './MsgInputSub';
 
 import Message from "./Message";
-import MsgInput from "./MsgInput";
 
 export default function Chat() {
   const classes = useStyles();

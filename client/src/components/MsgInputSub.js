@@ -12,6 +12,8 @@ export default function MsgInputSub({getMore}) {
 
   useEffect(() => {
     getMore();
+
+    return () => getMore()
   }, [])
 
   const [newMsgMutation] = useMutation(CREATE_MSG_MUTATION, {
