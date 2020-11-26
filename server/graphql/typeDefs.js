@@ -10,4 +10,7 @@ module.exports = `
   type Mutation {
     newMessage(user: String!, content: String!): Message!
   }
+  type Subscription {
+    getMessages: [Message!]
+  }
 `

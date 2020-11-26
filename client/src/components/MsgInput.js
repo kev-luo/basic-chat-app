@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import { useMutation } from "@apollo/client";
+
+import { users } from '../utils/randomUser';
 import { CREATE_MSG_MUTATION, GET_MESSAGES_QUERY } from "../utils/graphql";
 
 export default function MsgInput() {
-  const [msg, setMsg] = useState({ content: "", user: "Kevin" });
+  const [msg, setMsg] = useState({ user: "", content: "" });
   const classes = useStyles();
 
   const [newMsgMutation] = useMutation(CREATE_MSG_MUTATION, {
@@ -26,6 +28,10 @@ export default function MsgInput() {
   const handleSubmit = (e) => {
     e.preventDefault();
     newMsgMutation();
+    setMsg({
+      content:"",
+      user: ""
+    })
   };
 
   const handleChange = (e) => {
@@ -33,6 +39,7 @@ export default function MsgInput() {
     setMsg({
       ...msg,
       [name]: value,
+      user: users[Math.floor(Math.random() * 4)]
     });
   };
 
@@ -41,12 +48,12 @@ export default function MsgInput() {
       <form onSubmit={handleSubmit}>
         <input
           name="content"
-          value={msg.Content}
+          value={msg.content}
           onChange={handleChange}
           placeholder="Type a message"
           type="text"
         />
-        <Button color="primary">Send a message</Button>
+        <Button type="submit" color="primary">Send a message</Button>
       </form>
     </div>
   );
