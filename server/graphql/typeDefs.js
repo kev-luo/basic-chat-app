@@ -11,6 +11,6 @@ module.exports = `
     newMessage(user: String!, content: String!): Message!
   }
   type Subscription {
-    getMessages: [Message!]
+    newMessage: Message!
   }
 `

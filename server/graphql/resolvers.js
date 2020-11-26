@@ -1,5 +1,7 @@
 const Message = require("../models/Message");
 
+const NEW_MESSAGE = "NEW_MESSAGE";
+
 module.exports = {
   Query: {
     getMessages: async () => {
@@ -8,15 +10,20 @@ module.exports = {
     },
   },
   Mutation: {
-    newMessage: async (_, args) => {
+    newMessage: async (_, args, context) => {
       const newMsg = await Message.create(args);
+      context.pubsub.publish(NEW_MESSAGE, {
+        newMessage: newMsg
+      })
       return newMsg;
     },
   },
   Subscription: {
-    subscribe: (_, args, { pubsub }) => {
-      const channel = Math.random().toString(36).slice(2, 15);
-      return pubsub.asyncIterator(channel);
+    newMessage: {
+      subscribe: (_, __, context) => {
+        console.log(context.pubsub);
+        return context.pubsub.asyncIterator(NEW_MESSAGE);
+      },
     },
   },
 };
