@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
 export const GET_MESSAGES_QUERY = gql`
   {
@@ -8,14 +8,24 @@ export const GET_MESSAGES_QUERY = gql`
       content
     }
   }
-`
+`;
 
 export const CREATE_MSG_MUTATION = gql`
-  mutation newMessage($content: String!, $user: String!){
+  mutation newMessage($content: String!, $user: String!) {
     newMessage(content: $content, user: $user) {
       id
       user
       content
     }
   }
-`
+`;
+
+export const MSG_SUBSCRIPTION = gql`
+    subscription {
+      newMessage {
+        id
+        user
+        content
+      }
+    }
+`;

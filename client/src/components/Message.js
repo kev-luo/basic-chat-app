@@ -1,7 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-export default function Message({ message }) {
+export default function Message({ message}) {
   const classes = useStyles();
 
   return (

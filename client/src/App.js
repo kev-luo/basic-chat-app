@@ -5,20 +5,20 @@ import { getMainDefinition } from "@apollo/client/utilities";
 
 import {
   split,
-  HttpLink,
+  createHttpLink,
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
 } from "@apollo/client";
 
 const wsLink = new WebSocketLink({
-  uri: "ws://localhost:4000/",
+  uri: "ws://localhost:4000/graphql",
   options: {
     reconnect: true,
   },
 });
 
-const httpLink = new HttpLink({
+const httpLink = createHttpLink({
   uri: "http://localhost:4000/",
 });
 
