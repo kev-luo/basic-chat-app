@@ -1,9 +1,11 @@
 import React from 'react'
 
+import Message from './Message';
+
 export default function Chat() {
   return (
     <div>
-      What's up I'm a chat window
+      <Message />
     </div>
   )
 }

@@ -1,14 +1,16 @@
-const messages = [];
+const Message = require('../models/Message');
 
 module.exports = {
   Query: {
-    getMessages: () => messages,
+    getMessages: async () => {
+      const messages = await Message.find({});
+      return messages;
+    },
   },
   Mutation: {
-    newMessage: (_, args) => {
-      const newMessg = {...args, id: messages.length};
-      messages.push(newMessg);
-      return newMessg;
+    newMessage: async (_, args) => {
+      const newMsg = await Message.create(args);
+      return newMsg;
     }
   }
 }
