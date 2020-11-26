@@ -1,19 +1,28 @@
 import React from 'react'
-import { useQuery } from '@apollo/client';
-import { GET_MESSAGES_QUERY } from '../utils/graphql';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default function Message() {
-  const { data, error } = useQuery(GET_MESSAGES_QUERY);
-  if(error) {
-    console.log(error);
-  }
+export default function Message({message}) {
+  const classes = useStyles();
+
   return (
-    <div>
-      {data?.getMessages.map(message => {
-        return (
-          <div>{message.content}</div>
-        )
-      })}
+    <div className={classes.root}>
+      <div className={classes.messageBody}>
+        {message.content}
+      </div>
     </div>
   )
 }
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: "flex",
+    paddingBottom: "1em"
+  },
+  messageBody: {
+    background: "#58bf56",
+    color: "white",
+    padding: "1em",
+    borderRadius: "1em",
+    maxWidth: "60%",
+  }
+}))
