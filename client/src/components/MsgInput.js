@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import { CREATE_MSG_MUTATION, GET_MESSAGES_QUERY } from "../utils/graphql";
 
 export default function MsgInput() {
-  const [msg, setMsg] = useState({ content: "", user: "" });
+  const [msg, setMsg] = useState({ content: "", user: "Kevin" });
   const classes = useStyles();
 
   const [newMsgMutation] = useMutation(CREATE_MSG_MUTATION, {
@@ -17,14 +17,15 @@ export default function MsgInput() {
       cache.writeQuery({
         query: GET_MESSAGES_QUERY,
         data: {
-          getMessages: [...data, result.data.newMessage]
+          getMessages: [...data.getMessages, result.data.newMessage]
         }
       })
     }
   })
 
-  const handleSubmit = () => {
-    console.log(msg);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    newMsgMutation();
   };
 
   const handleChange = (e) => {
